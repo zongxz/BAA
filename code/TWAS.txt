@@ -1,0 +1,47 @@
+trait=acc
+
+python M03_betas.py \
+--snp_map_file ./twas/data/map_snp150_hg38.txt.gz \
+--gwas_file ./gwas_result/fastGWA.fastGWA \
+--snp_column SNP \
+--non_effect_allele_column A2 \
+--effect_allele_column A1 \
+--beta_column BETA \
+--pvalue_column P \
+--keep_non_rsid \
+--throw \
+--output ./twas/acc.txt.gz
+
+
+
+
+cat ./twas/data/all_tissue.txt | while read tissue;
+do
+	echo ${tissue}
+	python SPrediXcan.py \
+	--gwas_file ./twas/acc.txt.gz \
+	--snp_column snp \
+	--effect_allele_column effect_allele \
+	--non_effect_allele_column non_effect_allele \
+	--zscore_column zscore \
+	--model_db_path ./twas/data/models/eqtl/mashr/mashr_${tissue}.db \
+	--covariance ./twas/data/models/eqtl/mashr/mashr_${tissue}.txt.gz \
+	--keep_non_rsid \
+	--additional_output \
+	--model_db_snp_key varID \
+	--throw \
+	--output_file ./twas/result/acc_${tissue}.csv
+done
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+
+phen=acc
+
+cutoff=0.05
+gwas_result=${folder}prs/clump/gwas_clump_${cutoff}.txt
+for chr in {1..22}
+do
+
+plink2 \
+--bfile ${folder}info_pass/${chr} \
+--score ${gwas_result} 2 4 8 header list-variants cols=+scoresums \
+--extract ${folder}prs/clump/clump_${cutoff}.txt \
+--out ${folder}prs/${phen}/clump_${cutoff}/chr${chr}
+
+done
