@@ -1,7 +1,5 @@
 # Brain Age Acceleration (BAA) - Multi-omic Analysis
 
-[![DOI](https://zenodo.org/badge/DOI/您的DOI号.svg)](https://doi.org/您的DOI号)  <!-- 建议您在创建Release并获取DOI后替换此链接 -->
-
 ## Repository Overview
 This repository contains all custom scripts and pipelines for the data analysis presented in the manuscript:
 
