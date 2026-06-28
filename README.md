@@ -3,7 +3,7 @@
 ## Repository Overview
 This repository contains all custom scripts and pipelines for the data analysis presented in the manuscript:
 
-**"Multi-omic insights into the biological mechanisms and health impacts of Brain-Age Acceleration"**
+**"Integrative Analysis of Brain Age Acceleration: Health Associations and Multi-Omics Profiles"**
 
 The code encompasses the entire analysis pipeline, from brain age prediction using UK Biobank imaging data to downstream genome-wide association studies (GWAS), mediation analyses, and multi-omic integrative analyses.
 
