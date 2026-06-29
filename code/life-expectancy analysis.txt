@@ -1,0 +1,44 @@
+import delimited "death.csv"
+stset death_age, failure(death == 1) enter( age_i2 )  
+stpm2 decile4 i.sex i.education_class i.black i.asian i.mixed i.others i.chinese , df(4) scale(hazard) eform nolog
+			
+preserve
+clear
+tempfile result
+save `result', emptyok replace
+restore
+timer clear 1
+
+foreach i  of num 40(1)100 {
+		timer on 1
+    preserve
+		gen t`i'= `i' in 1/100  
+		range tt`i' `i' 100 100
+    display t`i'
+	  predictnl mm`i' = [predict( surv timevar(tt`i') at( decile4 1) ) / predict( surv timevar(t`i') at(decile4 1))]- [predict( surv timevar(tt`i') at( decile4 4) ) / predict( surv timevar(t`i') at(decile4 4) ) ],  ci(lci`i' uci`i') level(95) 
+		display   mm`i'	
+		integ mm`i' tt`i'
+	  scalar area_mm`i' = r(integral)
+		
+		integ lci`i' tt`i'
+	  scalar area_lci`i' = r(integral)
+		
+		integ uci`i' tt`i'
+	  scalar area_uci`i' = r(integral)
+		
+		
+		clear
+		set obs 1
+		gen cond = `i'
+		gen erl_mm = area_mm`i'
+		gen erl_lci = area_lci`i'
+		gen erl_uci = area_uci`i'
+		append using `result'
+		save `result', replace
+		restore
+		timer off 1
+	  } 
+timer list 1    
+use `result', clear
+sort cond
+save "ageacc4.dta",replace
