@@ -25,6 +25,3 @@ This study analyzed data from **over 60,000 individuals** from the **UK Biobank*
 *   **Single-cell Transcriptomic Data**: Used for cell-type specificity analysis.
 
 *Note: Due to data access restrictions, raw data cannot be shared in this repository. Access to UK Biobank data is managed through the UK Biobank Access Management System.*
-
-## Repository Structure & Scripts
-The scripts are organized to reproduce the major steps of the analysis pipeline:
