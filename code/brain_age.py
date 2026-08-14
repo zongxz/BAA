@@ -65,13 +65,11 @@ bias_model = sm.OLS(
 
 alpha, beta = bias_model.params
 
-pred_result["cal_pred_age"] = (
-    (pred_result["pred_age"] - alpha) / beta
-)
+pred_result["cal_pred_age"] = pred_result["pred_age"] + pred_result["age"] - (alpha + beta * pred_result["age"])
 
-pred_result["cal_brain_age_gap"] = (
-    pred_result["cal_pred_age"] - pred_result["age"]
-)
+
+pred_result["cal_brain_age_gap"] = pred_result["cal_pred_age"] - pred_result["age"]
+
 
 evaluate(pred_result["age"], pred_result["pred_age"], "Before correction")
 evaluate(pred_result["age"], pred_result["cal_pred_age"], "After correction")
