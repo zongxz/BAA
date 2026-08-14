@@ -96,13 +96,10 @@ for (disease in diseases) {
   coefficients <- coef(logit_model)
   std_errors <- sqrt(diag(vcov(logit_model)))
   
-  
   result['OR'] <- exp(coefficients)
   result['lower.95'] <- exp(coefficients - 1.96 * std_errors)
   result['upper.95'] <- exp(coefficients + 1.96 * std_errors)
-  
-  write.csv(result, paste0('/data1/zxz/r_work/age_acc2/result/F1-患病logit/logit_', 
-                           disease, '.csv'))
+
 }
 
 
@@ -144,7 +141,7 @@ for (disease in diseases) {
       p.value < 0.05 ~ "*",
       TRUE ~ "ns"
     ),
-    disease = disease)  # 添加疾病列
+    disease = disease)
   
   pairwise_results <- data.frame(pairs(emm, adjust = "BH"))
   
@@ -180,7 +177,6 @@ for (cor in cors_i0) {
                        'others', 'p53_time')]
   data.cor <- na.omit(data.cor)
   
-  # 计算偏相关系数
   pcor_result <- pcor.test(
     x = data.cor$age_acceleration, 
     y = data.cor[cor],
@@ -402,7 +398,6 @@ for (life in lifes) {
   coefficients <- coef(model)
   std_errors <- sqrt(diag(vcov(model)))
   
-  result['OR'] <- exp(coefficients)
   result['lower.95'] <- exp(coefficients - 1.96 * std_errors)
   result['upper.95'] <- exp(coefficients + 1.96 * std_errors)
 }
